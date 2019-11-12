@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class ObjectBox {
 
-    Collection coll;
+    Collection<Object> coll;
 
     public ObjectBox() {
         coll = new ArrayList();

@@ -4,7 +4,7 @@ package lesson_03;
  * @author Sharmin Aleksei
  * Домашнее задание 2. Тестирование классов
  */
-public class test {
+public class Test {
 
     public static void main(String[] args) {
 
