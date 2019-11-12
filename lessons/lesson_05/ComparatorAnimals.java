@@ -10,13 +10,6 @@ public class ComparatorAnimals implements Comparator<Animal> {
                 || o1.getOwnerName().compareTo(o2.getOwnerName()) <= 0 && o1.getName().compareTo(o2.getName()) <= 0 && o1.getWeight() < o2.getWeight()) {
                 return -1;
         }
-        else {
-            return 1;
-        }
-
-
-
+        return 1;
     }
-
-
 }
