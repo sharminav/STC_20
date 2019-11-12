@@ -14,18 +14,7 @@ public class task3 {
         persons = new Person[maxCount];
         persons1 = new Person[maxCount];
 
-        // Подготовка тестовых данных
-        String[] girlName = new String[4];
-        girlName[0] = "Маша";
-        girlName[1] = "Даша";
-        girlName[2] = "Олеся";
-        girlName[3] = "Ольга";
 
-        String[] boyName = new String[4];
-        boyName[0] = "Иван";
-        boyName[1] = "Станислав";
-        boyName[2] = "Олег";
-        boyName[3] = "Владимир";
 
         Integer[] testPosition = new Integer[4];
         testPosition[0] = (int) (Math.random() * maxCount);
@@ -36,16 +25,7 @@ public class task3 {
 
         // Заполнение случайными данными
         for (int i = 0; i < persons.length; i++) {
-            persons[i] = new Person();
-            persons[i].age = (int) (Math.random() * 100);
-            int sexGenerate = (int) (Math.random() * 2);
-            if (sexGenerate == 1) {
-                persons[i].sex = Sex.sex.MEN;
-                persons[i].name = boyName[(int) (Math.random() * 3)];
-            } else {
-                persons[i].sex = Sex.sex.WOMEN;
-                persons[i].name = girlName[(int) (Math.random() * 3)];
-            }
+            persons[i] = getPerson();
         }
 
         //PrintArray(persons);
@@ -63,6 +43,35 @@ public class task3 {
         // 4 случайных позиции
         PrintTest(persons, persons1, testPosition);
 
+    }
+
+    public static Person getPerson(){
+        Person person = new Person();
+
+        // Подготовка тестовых данных
+        String[] girlName = new String[4];
+        girlName[0] = "Маша";
+        girlName[1] = "Даша";
+        girlName[2] = "Олеся";
+        girlName[3] = "Ольга";
+
+        String[] boyName = new String[4];
+        boyName[0] = "Иван";
+        boyName[1] = "Станислав";
+        boyName[2] = "Олег";
+        boyName[3] = "Владимир";
+
+        person.age = (int) (Math.random() * 100);
+        int sexGenerate = (int) (Math.random() * 2);
+        if (sexGenerate == 1) {
+            person.sex = Sex.sex.MEN;
+            person.name = boyName[(int) (Math.random() * 3)];
+        } else {
+            person.sex = Sex.sex.WOMEN;
+            person.name = girlName[(int) (Math.random() * 3)];
+        }
+
+        return person;
     }
 
     static void PrintArray(Person[] persons) {

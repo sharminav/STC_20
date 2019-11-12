@@ -3,30 +3,32 @@ package lesson_02;
 import java.util.Comparator;
 
 public class Person {
-    String name;
-    Integer age;
-    Sex.sex sex;
+    public String name;
+    public Integer age;
+    public Sex.sex sex;
 
-    String getName(){return name;}
-    Integer getAge(){return age;}
-    Sex.sex getSex(){return sex;}
-}
+    public String getName(){return name;}
+    public Integer getAge(){return age;}
+    public Sex.sex getSex(){return sex;}
 
-
-class PersonNameComparator implements Comparator<Person>{
-    public int compare(Person a, Person b){
-        return a.getName().compareTo(b.getName());
+    @Override
+    public String toString(){
+        String result = "";
+        result = this.name + " - " + this.age + " - " + this.sex.toString();
+        return result;
     }
-}
 
-
-class PersonAgeComparator implements Comparator<Person>{
-    public int compare(Person a, Person b){
-        if(a.getAge()> b.getAge())
-            return 1;
-        else if(a.getAge()< b.getAge())
-            return -1;
-        else
-            return 0;
+    @Override
+    public boolean equals(Object equalsPerson) {
+        boolean result = false;
+        if (this.name == ((Person)equalsPerson).name &
+                this.age.equals(((Person)equalsPerson).age) &
+                this.sex == ((Person)equalsPerson).sex ) {
+            result = true;
+        }
+        return  result;
     }
+
 }
+
+
