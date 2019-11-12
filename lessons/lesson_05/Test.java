@@ -56,6 +56,7 @@ public class Test {
 
     /**
      * Добавление животного в список с проверкой возможности добавления
+     * @param animal добавляемое в список животное
      */
     private static void addAnimal(Animal animal) throws Exception {
         animal.canAddToCollection(animalList);
@@ -68,6 +69,9 @@ public class Test {
         }
     }
 
+    /**
+     * @param aninalUUID идентификатор для изменения животного
+     */
     private static void changeAnimal(UUID aninalUUID) {
         for (Animal animal: animalList) {
             if (animal.id == aninalUUID) {
@@ -81,6 +85,9 @@ public class Test {
         }
     }
 
+    /**
+     * @param nameFind имя для поиская животного
+     */
     private static void findAnimal(String nameFind) {
         for (Animal animal: animalList) {
             if (animal.getName().equals(nameFind)) {

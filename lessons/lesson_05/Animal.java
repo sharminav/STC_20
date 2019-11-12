@@ -28,6 +28,7 @@ public class Animal {
 
     /**
      * Проверка возможности добавления животного в коллекцию
+     * @param animalList список, в который добавляется животное
      */
     public void canAddToCollection(ArrayList<Animal> animalList) throws Exception {
         Iterator<Animal> itr = animalList.iterator();

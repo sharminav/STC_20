@@ -1,7 +1,5 @@
 package lesson_05;
 
-import lesson_02.Person;
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ComparatorAnimals implements Comparator<Animal> {
