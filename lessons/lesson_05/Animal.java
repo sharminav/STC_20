@@ -42,9 +42,4 @@ public class Animal {
         return  result;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = (int)this.getName().charAt(0) + (int)this.getWeight();
-        return hash;
-    }
 }

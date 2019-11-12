@@ -83,15 +83,13 @@ public class Test {
         System.out.println("\nИзменение животного");
         // поиск животного по id
         System.out.println("ID для изменения животного - " + animalUUID.toString());
-        Animal changeAnimal = animalHashMap.get(animalUUID);
 
         // генерация новых значений
-        System.out.println("Начальное животное - " + changeAnimal.toString());
-        changeAnimal = generateAnimal();
+        Animal changeAnimal = generateAnimal();
         System.out.println("Измененное животное - " + changeAnimal.toString());
 
         // изменение животного в коллекции
-        animalHashMap.put(animalUUID, changeAnimal);
+        animalHashMap.replace(animalUUID, changeAnimal);
     }
 
     /**
@@ -101,6 +99,7 @@ public class Test {
     private static void findAnimal(String nameFind) {
         System.out.println("\nПоиск животного");
         System.out.println("Имя для поиска животного - " + nameFind.toString());
+
         for (Map.Entry<UUID, Animal> entry : animalHashMap.entrySet()) {
             if (entry.getValue().getName().equals(nameFind)) {
                 System.out.println("Найденное животное - "  + entry.toString());
@@ -113,9 +112,11 @@ public class Test {
      */
     private static void sort(){
         System.out.println("\nСортировка списка");
+
         Collection<Animal> animalCollection = animalHashMap.values();
         ArrayList<Animal> animalArrayList = new ArrayList<>(animalCollection);
         animalArrayList.sort(new ComparatorAnimals());
+
         for (Animal entry: animalArrayList) {
             System.out.println(entry.toString());
         }
