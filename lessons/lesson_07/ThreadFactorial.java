@@ -16,6 +16,6 @@ public class ThreadFactorial implements Runnable {
         public void run(){
             System.out.println();
             BigInteger factorialResult = Factorial.factorial(factorial);
-            System.out.println(Thread.currentThread().getName() + " - число - " + factorial + " результат - " + factorialResult);
+            System.out.println(Thread.currentThread().getName() + "\t" + factorial + "\t" + factorialResult);
         }
 }
