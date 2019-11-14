@@ -1,18 +1,35 @@
 package lesson_06;
 
+import java.util.ArrayList;
+
+/**
+ * @author Sharmin Aleksei
+ * Класс для генерации случайного текста
+ */
+
 public class TextGenerator {
 
     private static String eng = "abcdefghijklmnopqrstuvwxyz";
     private static String last = "(.|!|?)+\"";
 
-    public static String generateText(int textLenght) {
-        String result = "";
+    /**
+     * Генерация текста, абзацы текста в ArrayList
+     * @param textLenght количество абзацев в тексте
+     * @return абзацы текста в объекие ArrayList
+     */
+    public static ArrayList<String> generateText(int textLenght) {
+        ArrayList<String> result = new ArrayList<String>();
         for (var i = 0; i < textLenght; i++) {
-            result = result + "!!!" + generateParagraph((int)(Math.random() * 13) + 1);
+            result.add(generateParagraph((int)(Math.random() * 13) + 1));
         }
         return result;
     }
 
+    /**
+     * Генерация абзаца
+     * @param paragraphLenght количество предложений в абзаце
+     * @return абзац
+     */
     private static String generateParagraph(int paragraphLenght) {
         String result = "";
         for (var i = 0; i < paragraphLenght; i++) {
@@ -22,6 +39,11 @@ public class TextGenerator {
         return result;
     }
 
+    /**
+     * Генерация предложений
+     * @param sentenceLenght количество слов в предложении
+     * @return предложение
+     */
     private static String generateSentence(int sentenceLenght) {
         String result = "";
         for (int i = 0; i < sentenceLenght; i++) {
@@ -46,6 +68,12 @@ public class TextGenerator {
         return result;
     }
 
+    /**
+     * Генерация слова
+     * @param wordLenght для слова
+     * @param firstWord признак того, является ли слово первым в предложении
+     * @return слово, состоящее из случайных символов английского алфавита
+     */
     private static String generateWord(int wordLenght, boolean firstWord) {
         String result = "";
         for (int i = 0; i < wordLenght; i++) {
