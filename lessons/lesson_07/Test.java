@@ -32,9 +32,11 @@ public class Test {
      * Запуск потокав из массива
      * @param threads массив потоков
      */
-    private static void startThreads(Thread[] threads) {
-        for (Thread t : threads)
+    private static void startThreads(Thread[] threads) throws InterruptedException {
+        for (Thread t : threads) {
             t.start();
+        }
+
     }
 
  }
