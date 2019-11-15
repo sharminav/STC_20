@@ -10,17 +10,18 @@ import java.util.ArrayList;
 public class TextGenerator {
 
     private static String eng = "abcdefghijklmnopqrstuvwxyz";
-    private static String last = "(.|!|?)+\"";
+    private static String last = ".!?";
+    private static int arrayLen = 2;
 
     /**
      * Генерация текста, абзацы текста в ArrayList
      * @param textLenght количество абзацев в тексте
      * @return абзацы текста в объекие ArrayList
      */
-    public static ArrayList<String> generateText(int textLenght) {
+    public static ArrayList<String> generateText(int textLenght, double probability, String[] words) {
         ArrayList<String> result = new ArrayList<String>();
         for (var i = 0; i < textLenght; i++) {
-            result.add(generateParagraph((int)(Math.random() * 13) + 1));
+            result.add(generateParagraph((int)(Math.random() * 13 + 1), probability, words));
         }
         return result;
     }
@@ -30,13 +31,13 @@ public class TextGenerator {
      * @param paragraphLenght количество предложений в абзаце
      * @return абзац
      */
-    private static String generateParagraph(int paragraphLenght) {
-        String result = "";
+    private static String generateParagraph(int paragraphLenght, double probability, String[] words) {
+        StringBuilder result = new StringBuilder();
         for (var i = 0; i < paragraphLenght; i++) {
-            result = result + generateSentence((int)(Math.random() * 13) + 1);
+            result.append(generateSentence((int)(Math.random() * 13 + 1), probability, words));
         }
-        result = result + "\n";
-        return result;
+        result.append("\n");
+        return result.toString();
     }
 
     /**
@@ -44,28 +45,38 @@ public class TextGenerator {
      * @param sentenceLenght количество слов в предложении
      * @return предложение
      */
-    private static String generateSentence(int sentenceLenght) {
-        String result = "";
+    private static String generateSentence(int sentenceLenght, double probability, String[] words) {
+        StringBuilder result = new StringBuilder();
+
+        // Добавление слов из массива с вероятностью
+        int wordsArrayCount = (int)(sentenceLenght * probability);
+        //System.out.println(sentenceLenght + " " + wordsArrayCount + " " + probability);
+
         for (int i = 0; i < sentenceLenght; i++) {
-            if (i == 0) {
-                result = result + generateWord((int)(Math.random() * 13) + 1, true);
+
+            if (i < wordsArrayCount) {
+                result.append(words[(int)(Math.random() * arrayLen)]);
             }
             else {
-                result = result + generateWord((int)(Math.random() * 13) + 1, false);
-            }
-            // добавление пробела
-            if (i < sentenceLenght - 1) {
-                // добавление случайной запятой
-                if ((int)(Math.random() * 2) == 0) {
-                    result = result + ",";
-                }
-                result = result + " ";
-            }
 
+                if (i == 0) {
+                    result.append(generateWord((int) (Math.random() * 13) + 1, true));
+                } else {
+                    result.append(generateWord((int) (Math.random() * 13) + 1, false));
+                }
+            }
+             // добавление пробела
+             if (i < sentenceLenght - 1) {
+                // добавление случайной запятой
+                if ((int) (Math.random() * 2) == 0) {
+                    result.append(",");
+                }
+                result.append(" ");
+             }
         }
         // заключительный символ предложения
-        result = result + last.charAt((int)(Math.random() * 8)) + " ";
-        return result;
+        result.append(last.charAt((int)(Math.random() * last.length())) + " ");
+        return result.toString();
     }
 
     /**
@@ -75,16 +86,28 @@ public class TextGenerator {
      * @return слово, состоящее из случайных символов английского алфавита
      */
     private static String generateWord(int wordLenght, boolean firstWord) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < wordLenght; i++) {
             int symbolNumber = (int)(Math.random() * 25);
-            result = result + eng.charAt(symbolNumber);
+            result.append(eng.charAt(symbolNumber));
             if (firstWord && i == 0) {
-                result = result.toUpperCase();
+                result.append(eng.toUpperCase().charAt(symbolNumber));
             }
         }
         //System.out.println(wordLenght + result);
-        return result;
+        return result.toString();
+    }
+
+    /**
+     * Создание массива слов
+     * @return массив слов
+     */
+    public static String[] wordsGenerator() {
+        String[] words = new String[arrayLen];
+        for (int i = 0; i < arrayLen; i++) {
+            words[i] = "Сова";//generateWord((int)(Math.random() * 13) + 1, false);
+        }
+        return words;
     }
 
 }
