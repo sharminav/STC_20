@@ -26,6 +26,7 @@ public class Test {
             threads[i] = new Thread(threadFactorial, String.format("Thread %d", i));
         }
         startThreads(threads);
+        System.out.println("End main thread");
     }
 
     /**
@@ -36,7 +37,7 @@ public class Test {
         for (Thread t : threads) {
             t.start();
         }
-
+        Thread.sleep(1000);
     }
 
  }
