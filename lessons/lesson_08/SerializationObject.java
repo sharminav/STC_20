@@ -33,8 +33,10 @@ public class SerializationObject implements Serializable {
 
         StringBuilder str = new StringBuilder();
         for (Integer n: arrayListFiled) {
-            str.append(n.toString() + " ");
+            str.append(n.toString() + ", ");
         }
+        str.deleteCharAt(str.length() - 1);
+        str.deleteCharAt(str.length() - 1);
 
         return "SerializationObject{" +
                 "intField=" + intField +
