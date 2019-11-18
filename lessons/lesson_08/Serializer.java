@@ -132,7 +132,7 @@ public class Serializer {
             try {
                 Field f = serializationObject.getClass().getDeclaredField(arr[i]);
                 f.setAccessible(true);
-                System.out.println(f.getType());
+                //System.out.println(f.getType());
 
                 // обработка примитивных типов
                 if (f.getType().toString().compareTo("int") == 0) {
@@ -147,8 +147,7 @@ public class Serializer {
 
                 // обработка ссылочных типов
                 else if (f.getType().toString().compareTo("class java.lang.Integer") == 0) {
-                    f.set(serializationObject, (Object) Integer.parseInt(arr[i + 1]));
-
+                    f.set(serializationObject, Integer.parseInt(arr[i + 1]));
                 }
                 else if (f.getType().toString().compareTo("class java.lang.String") == 0) {
                     f.set (serializationObject, (Object) arr[i + 1]);
