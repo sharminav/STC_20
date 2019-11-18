@@ -8,21 +8,19 @@ import java.util.ArrayList;
  */
 public class SerializationObject implements Serializable {
 
-    public int intField;
+    private int intField;
     public boolean booleanField;
     public char charField;
 
     public Integer intField1;
-    public ArrayList<Integer> arrayListFiled;
-
-    private static final long serialVersionUID = 1L;
+    private ArrayList<Integer> arrayListFiled;
 
     public SerializationObject() {
         intField = (int)(Math.random() * 10000);
-        booleanField = true;
-        charField = 'a';
+        booleanField = false;
+        charField = 'b';
 
-        intField = (int)(Math.random() * 10000);
+        intField1 = (int)(Math.random() * 10000);
         arrayListFiled = new ArrayList<Integer>();
         arrayListFiled.add((int)(Math.random() * 10000));
         arrayListFiled.add((int)(Math.random() * 10000));
