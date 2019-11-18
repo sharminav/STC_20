@@ -132,21 +132,28 @@ public class Serializer {
             try {
                 Field f = serializationObject.getClass().getDeclaredField(arr[i]);
                 f.setAccessible(true);
-                //System.out.println(f.getType());
+                System.out.println(f.getType());
 
                 // обработка примитивных типов
                 if (f.getType().toString().compareTo("int") == 0) {
                     f.setInt(serializationObject, Integer.parseInt(arr[i + 1]));
-                } else if (f.getType().toString().compareTo("boolean") == 0)
+                }
+                else if (f.getType().toString().compareTo("boolean") == 0) {
                     f.setBoolean(serializationObject, Boolean.valueOf(arr[i + 1]));
-                else if (f.getType().toString().compareTo("char") == 0)
+                }
+                else if (f.getType().toString().compareTo("char") == 0) {
                     f.setChar(serializationObject, arr[i + 1].charAt(0));
+                }
 
-                    // обработка ссылочных типов
+                // обработка ссылочных типов
                 else if (f.getType().toString().compareTo("class java.lang.Integer") == 0) {
                     f.set(serializationObject, (Object) Integer.parseInt(arr[i + 1]));
-                } else if (f.getType().toString().compareTo("class java.util.ArrayList") == 0) {
 
+                }
+                else if (f.getType().toString().compareTo("class java.lang.String") == 0) {
+                    f.set (serializationObject, (Object) arr[i + 1]);
+                }
+                else if (f.getType().toString().compareTo("class java.util.ArrayList") == 0) {
                     // подготовка строки
                     arr[i + 1] = arr[i + 1].replace("[", "");
                     arr[i + 1] = arr[i + 1].replace("]", "");

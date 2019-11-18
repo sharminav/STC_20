@@ -11,6 +11,7 @@ public class SerializationObject implements Serializable {
     private int intField;
     public boolean booleanField;
     public char charField;
+    public String stringField;
 
     public Integer intField1;
     private ArrayList<Integer> arrayListFiled;
@@ -19,6 +20,7 @@ public class SerializationObject implements Serializable {
         intField = (int)(Math.random() * 10000);
         booleanField = false;
         charField = 'b';
+        stringField = "Crocodile" + intField;
 
         intField1 = (int)(Math.random() * 10000);
         arrayListFiled = new ArrayList<Integer>();
@@ -40,6 +42,7 @@ public class SerializationObject implements Serializable {
                 "intField=" + intField +
                 ", booleanField=" + booleanField +
                 ", charField=" + charField +
+                ", stringField=" + stringField +
                 ", intField1=" + intField1 +
                 ", arrayListFiled=[" + str  + "]" +
                 '}';
