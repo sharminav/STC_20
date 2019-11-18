@@ -22,19 +22,19 @@ public class Test {
         System.out.println("create object " + serializationObject.toString());
 
         // сериализация объектa
-        Serializer.serialize(serializationObject, file);
+        Serializer.serializeWithoutReflection(serializationObject, file);
         // обнуление объекта
         objectToNull(serializationObject);
         // десериализация объекта
-        serializationObject = (SerializationObject) Serializer.deSerialize(file);
+        serializationObject = (SerializationObject) Serializer.deSerializeWIthoutReflection(file);
         System.out.println("deserialize object " + serializationObject.toString());
 
         // сериализация объектa при помощи рефлексии
-        Serializer.serializeReflection(serializationObject, file1);
+        Serializer.serialize(serializationObject, file1);
         // обнуление объекта
         objectToNull(serializationObject);
         // десериализация объекта при помощи рефлексии
-        serializationObject = (SerializationObject) Serializer.deSerializeReflection(file1);
+        serializationObject = (SerializationObject) Serializer.deSerialize(file1);
 
         System.out.println("deserialize reflection object " + serializationObject.toString());
 
