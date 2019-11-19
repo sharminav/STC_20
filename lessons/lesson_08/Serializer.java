@@ -24,7 +24,7 @@ public class Serializer  implements SerializerInterface{
         //Сериализация в файл с помощью класса ObjectOutputStream
         try {
             FileOutputStream fos = new FileOutputStream(file);
-            serialize(object, fos, "");
+            serialize(object, fos);
             fos.close();
             System.out.println("serialize reflection success");
         }
@@ -34,7 +34,12 @@ public class Serializer  implements SerializerInterface{
 
     }
 
-    public void serialize (Object object, FileOutputStream fos, String parentClass) {
+    /**
+     *
+     * @param object объект для сериализации
+     * @param fos открытый FileOutputStream
+     */
+    public void serialize (Object object, FileOutputStream fos) {
         try {
             Field[] fields = object.getClass().getDeclaredFields();
             for (Field f : fields) {
@@ -46,7 +51,7 @@ public class Serializer  implements SerializerInterface{
                     fieldString = f1.getName() + "!" + f1.get(object) + "!";
                 }
                 else {
-                    serialize(f1.get(object), fos, f1.getName()+ "." );
+                    serialize(f1.get(object), fos);
                 }
                 //System.out.println(f1.getName() + " - " + f1.get(object) + " - " + f1.getType().toString());
                 SaveObjectToFile.save(fos, fieldString);
