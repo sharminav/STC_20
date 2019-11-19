@@ -69,44 +69,37 @@ public class Serializer  implements SerializerInterface{
 
         SerializationObject serializationObject = new SerializationObject();
         SerializationObjectChild serializationObjectChild = new SerializationObjectChild();
+        Object tempObject = null;
 
         String str = "";
-        String[] arr = null;
-
-        // чтение из файла
-        try (FileInputStream fin = new FileInputStream(file)) {
-            byte[] buffer = new byte[fin.available()];
-            fin.read(buffer, 0, buffer.length);
-            str = new String(buffer, "Windows-1251");
-            arr = str.split("!");
-
-        } catch (IOException  ex) {
-            System.out.println(ex.getMessage());
-        }
+        String[] arr = read(file);
 
         Field f = null;
         // заполнение полей через рефлексию
         for (int i = 0; i < arr.length; i = i + 2) {
             try {
-                if (arr[i].indexOf("child") == -1)
+                if (arr[i].indexOf("child") == -1) {
                     f = serializationObject.getClass().getDeclaredField(arr[i]);
-                else
+                    tempObject = serializationObject;
+                }
+                else {
                     f = serializationObjectChild.getClass().getDeclaredField(arr[i]);
+                    tempObject = serializationObjectChild;
+                }
                 f.setAccessible(true);
 
                 // обработка примитивных типов
-                if (f.getType().toString().compareTo("int") == 0) {
-                    if (arr[i].indexOf("child") == -1) f.setInt(serializationObject, Integer.parseInt(arr[i + 1]));
-                    else f.setInt(serializationObjectChild, Integer.parseInt(arr[i + 1]));
-                }
-                else if (f.getType().toString().compareTo("boolean") == 0) {
-                    if (arr[i].indexOf("child") == -1) f.setBoolean(serializationObject, Boolean.valueOf(arr[i + 1]));
-                    else f.setBoolean(serializationObjectChild, Boolean.valueOf(arr[i + 1]));
-                }
-                else if (f.getType().toString().compareTo("char") == 0) {
-                    if (arr[i].indexOf("child") == -1) f.setChar(serializationObject, (arr[i + 1]).charAt(0));
-                    else f.setChar(serializationObjectChild, (arr[i + 1]).charAt(0));
-                }
+                if (f.getType().toString().compareTo("int") == 0)
+                    f.setInt(tempObject, Integer.parseInt(arr[i + 1]));
+                else if (f.getType().toString().compareTo("boolean") == 0)
+                    f.setBoolean(tempObject, Boolean.valueOf(arr[i + 1]));
+                else if (f.getType().toString().compareTo("char") == 0)
+                    f.setChar(tempObject, (arr[i + 1]).charAt(0));
+
+                if (arr[i].indexOf("child") == -1)
+                    serializationObject = (SerializationObject) tempObject;
+                else
+                    serializationObjectChild = (SerializationObjectChild) tempObject;
             }
             catch (NoSuchFieldException | IllegalAccessException ex ) {
                 System.out.println("ERROR NoSuchFieldException " + ex.getMessage());
@@ -118,6 +111,25 @@ public class Serializer  implements SerializerInterface{
         return  result;
     }
 
+    /**
+     * Чтение объекта из файла
+     * @param file имя файла
+     * @return строки из файла
+     */
+    private String[] read (String file) {
+        String[] result = null;
+        // чтение из файла
+        try (FileInputStream fin = new FileInputStream(file)) {
+            byte[] buffer = new byte[fin.available()];
+            fin.read(buffer, 0, buffer.length);
+            String str = new String(buffer, "Windows-1251");
+            result = str.split("!");
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return result;
+    }
 
 }
 

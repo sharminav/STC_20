@@ -1,6 +1,7 @@
 package lesson_08;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Дочерний клас для сериализации
@@ -11,7 +12,7 @@ public class SerializationObjectChild implements Serializable
     private char childCharField;
 
     public SerializationObjectChild() {
-        childCharField = 'q';
+        childCharField = (char)((new Random()).nextInt(26) + 'a');;
         childIntField = (int)(Math.random() * 10000);
     }
 
