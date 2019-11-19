@@ -10,41 +10,46 @@ public class SerializationObject implements Serializable {
 
     private int intField;
     public boolean booleanField;
-    public char charField;
-    public String stringField;
+    public SerializationObjectChild objectFiled;
 
-    public Integer intField1;
-    private ArrayList<Integer> arrayListFiled;
+    // Поля убраны для уменьшения кода
+    //public char charField;
+    //public String stringField;
+    //public Integer intField1;
+    //private ArrayList<Integer> arrayListFiled;
 
     public SerializationObject() {
         intField = (int)(Math.random() * 10000);
         booleanField = false;
-        charField = 'b';
-        stringField = "Crocodile" + intField;
+        objectFiled = new SerializationObjectChild();
 
-        intField1 = (int)(Math.random() * 10000);
-        arrayListFiled = new ArrayList<Integer>();
-        arrayListFiled.add((int)(Math.random() * 10000));
-        arrayListFiled.add((int)(Math.random() * 10000));
+        // Поля убраны для уменьшения кода
+        //charField = 'b';
+        //stringField = "Crocodile" + intField;
+        //intField1 = (int)(Math.random() * 10000);
+        //arrayListFiled = new ArrayList<Integer>();
+        //arrayListFiled.add((int)(Math.random() * 10000));
+        //arrayListFiled.add((int)(Math.random() * 10000));
     }
 
     @Override
     public String toString() {
 
-        StringBuilder str = new StringBuilder();
-        for (Integer n: arrayListFiled) {
-            str.append(n.toString() + ", ");
-        }
-        str.deleteCharAt(str.length() - 1);
-        str.deleteCharAt(str.length() - 1);
+        //StringBuilder str = new StringBuilder();
+        //for (Integer n: arrayListFiled) {
+        //    str.append(n.toString() + ", ");
+        //}
+        //str.deleteCharAt(str.length() - 1);
+        //str.deleteCharAt(str.length() - 1);
 
         return "SerializationObject{" +
                 "intField=" + intField +
                 ", booleanField=" + booleanField +
-                ", charField=" + charField +
-                ", stringField=" + stringField +
-                ", intField1=" + intField1 +
-                ", arrayListFiled=[" + str  + "]" +
+                ", objectFiled=" + objectFiled.toString() +
+                //", charField=" + charField +
+                //", stringField=" + stringField +
+                //", intField1=" + intField1 +
+                //", arrayListFiled=[" + str  + "]" +
                 '}';
     }
 
