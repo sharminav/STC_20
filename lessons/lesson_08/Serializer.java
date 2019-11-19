@@ -65,13 +65,10 @@ public class Serializer  implements SerializerInterface{
      * @return объект
      */
     public Object deSerialize(String file) {
-        Object result = new SerializationObject();
 
         SerializationObject serializationObject = new SerializationObject();
-        SerializationObjectChild serializationObjectChild = new SerializationObjectChild();
         Object tempObject = null;
 
-        String str = "";
         String[] arr = read(file);
 
         Field f = null;
@@ -83,8 +80,8 @@ public class Serializer  implements SerializerInterface{
                     tempObject = serializationObject;
                 }
                 else {
-                    f = serializationObjectChild.getClass().getDeclaredField(arr[i]);
-                    tempObject = serializationObjectChild;
+                    f = serializationObject.objectFiled.getClass().getDeclaredField(arr[i]);
+                    tempObject = serializationObject.objectFiled;
                 }
                 f.setAccessible(true);
 
@@ -95,20 +92,13 @@ public class Serializer  implements SerializerInterface{
                     f.setBoolean(tempObject, Boolean.valueOf(arr[i + 1]));
                 else if (f.getType().toString().compareTo("char") == 0)
                     f.setChar(tempObject, (arr[i + 1]).charAt(0));
-
-                if (arr[i].indexOf("child") == -1)
-                    serializationObject = (SerializationObject) tempObject;
-                else
-                    serializationObjectChild = (SerializationObjectChild) tempObject;
             }
             catch (NoSuchFieldException | IllegalAccessException ex ) {
                 System.out.println("ERROR NoSuchFieldException " + ex.getMessage());
             }
         }
-        serializationObject.objectFiled = serializationObjectChild;
-        result = serializationObject;
         System.out.println("deserialize reflection success");
-        return  result;
+        return  serializationObject;
     }
 
     /**
