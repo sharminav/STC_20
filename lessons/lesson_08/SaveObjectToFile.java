@@ -13,7 +13,7 @@ class SaveObjectToFile {
      */
     public static void save(FileOutputStream fos, String field)  {
         try {
-            byte[] buffer = (field).getBytes();
+            byte[] buffer = field.getBytes();
             fos.write(buffer, 0, buffer.length);
         }
         catch (IOException ex) {
