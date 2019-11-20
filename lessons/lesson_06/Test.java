@@ -1,5 +1,6 @@
 package lesson_06;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -26,18 +27,18 @@ public class Test {
 
         // тестирование задания №1
         // чтение файла, сортировка слов и запись в новый файл
-        SaveTextToFile.saveTextToFileArrayList(filePath1, SortFile.getWords(), "\r\n");
+        SaveTextToFile.saveTextToFile(filePath1, SortFile.getWords(), "\r\n");
 
         // тестирование задания №2.1
         // генерация случайного текста и сохранеие в файл
         String filePath2 = "C://temp";
         String[] words = TextGenerator.wordsGenerator();
-        getFiles(filePath2, 3, 2, words, 2);
+        getFiles(filePath2, 3, 10123, words, 2);
     }
 
     private static void  getFiles(String path, int n, int size, String[] words, int probability) {
         for (int i = 0; i < n; i++) {
-            SaveTextToFile.saveTextToFileArrayList(path + "//generateText_" + i + ".txt", new TextGenerator().generateText(size, (double)1/probability, words), "");
+            SaveTextToFile.saveTextToFile(path + "//generateText_" + i + ".txt", new TextGenerator().generateText(size, (double)1/probability, words));
         }
     }
 }

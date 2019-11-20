@@ -1,6 +1,8 @@
 package lesson_06;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Sharmin Aleksei
@@ -15,15 +17,20 @@ public class TextGenerator {
 
     /**
      * Генерация текста, абзацы текста в ArrayList
-     * @param textLenght количество абзацев в тексте
+     * @param size размер текста в байтах
      * @return абзацы текста в объекие ArrayList
      */
-    public static ArrayList<String> generateText(int textLenght, double probability, String[] words) {
-        ArrayList<String> result = new ArrayList<String>();
-        for (var i = 0; i < textLenght; i++) {
-            result.add(generateParagraph((int)(Math.random() * 13 + 1), probability, words));
-        }
-        return result;
+    public static byte[] generateText(int size, double probability, String[] words) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while (stringBuilder.toString().getBytes().length < size) {
+            String paragraph = generateParagraph((int)(Math.random() * 13 + 1), probability, words);
+            stringBuilder.append(paragraph).append("\n\r");
+            //System.out.println(byteSize + " " + stringBuilder.toString().getBytes().length + " - " + size);
+        } ;
+
+        return Arrays.copyOfRange(stringBuilder.toString().getBytes(), 0, size);
     }
 
     /**

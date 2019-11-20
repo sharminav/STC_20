@@ -1,10 +1,8 @@
 package lesson_06;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
+import java.util.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author SharminAleksei
@@ -16,11 +14,10 @@ public class SortFile {
      * Получение отсортированного списка уникальных слов
      * @return отсортированный список уникальных слов
      */
-    public static ArrayList<String> getWords() {
-        ArrayList<String> result = new ArrayList<String>();
+    public static NavigableSet<String> getWords() {
         String wordsString = readFromFile();
         wordsString = wordsString.replace("\r\n", " ");
-        result = getSortArrayList(wordsString);
+        NavigableSet<String>  result = getSortArrayList(wordsString);
         return result;
     }
 
@@ -47,23 +44,26 @@ public class SortFile {
      * @param wordsString слова из файла
      * @return отсортирванный список уникальных слов
      */
-    private static ArrayList<String> getSortArrayList(String wordsString) {
-        ArrayList<String> result = new ArrayList<String>();
+    private static NavigableSet<String> getSortArrayList(String wordsString) {
+
+        //List<String> result = new ArrayList<>();
         String[] wordsArray = wordsString.split(" ");
+        NavigableSet<String> treeSetWords = new TreeSet<>();
+
 
         // Используем HashMap для получения только УНИКАЛЬНЫХ слов
-        HashMap<String, String> wordsHashMap = new HashMap<String, String>();
+        //Map<String, String> wordsHashMap = new HashMap<>();
         for (int i = 0; i < wordsArray.length; i++) {
-            wordsHashMap.put(wordsArray[i].toUpperCase(), wordsArray[i].toUpperCase());
+           // wordsHashMap.put(wordsArray[i].toUpperCase(), wordsArray[i].toUpperCase());
+            treeSetWords.add(wordsArray[i].toUpperCase());
         }
-
         // Используем ArrayList для сортировки с использоваение интерфейса Comparator
-        for (Map.Entry<String, String> entry : wordsHashMap.entrySet()) {
-            result.add(entry.getValue().toUpperCase());
-        }
-        result.sort(new ComparatorWord());
+        //for (Map.Entry<String, String> entry : wordsHashMap.entrySet()) {
+        //    result.add(entry.getValue().toUpperCase());
+        //}
+        //result.sort(new ComparatorWord());
 
-        return result;
+        return treeSetWords;
     }
 }
 
