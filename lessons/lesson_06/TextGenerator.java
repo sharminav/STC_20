@@ -35,12 +35,12 @@ public class TextGenerator {
 
     /**
      * Генерация абзаца
-     * @param paragraphLenght количество предложений в абзаце
+     * @param paragraphLength количество предложений в абзаце
      * @return абзац
      */
-    private static String generateParagraph(int paragraphLenght, double probability, String[] words) {
+    private static String generateParagraph(int paragraphLength, double probability, String[] words) {
         StringBuilder result = new StringBuilder();
-        for (var i = 0; i < paragraphLenght; i++) {
+        for (var i = 0; i < paragraphLength; i++) {
             result.append(generateSentence((int)(Math.random() * 13 + 1), probability, words));
         }
         result.append("\n");
@@ -62,7 +62,7 @@ public class TextGenerator {
         for (int i = 0; i < sentenceLenght; i++) {
 
             if (i < wordsArrayCount) {
-                result.append(words[(int)(Math.random() * arrayLen)]);
+                result.append(words[(int)(Math.random() * words.length)]);
             }
             else {
 
