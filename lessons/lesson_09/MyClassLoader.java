@@ -13,6 +13,7 @@ import java.lang.ClassLoader;
 public class MyClassLoader extends ClassLoader {
 
     private final String filePath = "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\WorkerClass.class";
+    //private final String filePath = "C:\\temp\\WorkerClass.class";
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {

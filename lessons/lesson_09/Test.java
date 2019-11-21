@@ -28,6 +28,7 @@ import java.util.concurrent.locks.LockSupport;
 public class Test {
 
     private final static String fileName =  "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\WorkerClass.java";
+    //private final static String fileName =  "C:\\temp\\WorkerClass.java";
 
     public static void main(String[] args) throws Exception {
         System.out.println("start program");
