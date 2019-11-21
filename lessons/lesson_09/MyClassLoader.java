@@ -12,12 +12,12 @@ import java.lang.ClassLoader;
  */
 public class MyClassLoader extends ClassLoader {
 
-    private final String filePath = "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\WorkerClass.class";
+    private final String filePath = "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\SomeClass.class";
     //private final String filePath = "C:\\temp\\WorkerClass.class";
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
-        if ("lesson_09.WorkerClass".equals(name)) {
+        if ("lesson_09.SomeClass".equals(name)) {
             return findClass(name);
         }
         return super.loadClass(name);
@@ -26,7 +26,7 @@ public class MyClassLoader extends ClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         System.out.println("findClass starts work: " + name);
-        if ("lesson_09.WorkerClass".equals(name)) {
+        if ("lesson_09.SomeClass".equals(name)) {
             try {
                 byte[] bytes = Files.readAllBytes(Paths.get(filePath));
                 System.out.println("findClass success");

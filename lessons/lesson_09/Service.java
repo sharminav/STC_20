@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Service {
 
-    private final static String fileName =  "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\WorkerClass.java";
+    private final static String fileName =  "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\SomeClass.java";
 
     /**
      * Ввод данных с клавиатуры

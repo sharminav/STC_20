@@ -6,7 +6,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.Paths;
 
 /**
  * Класс для компиляции java файла
@@ -23,7 +22,7 @@ public class Compile {
             compiler.run(null, null, null, fileName);
 
             URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURI().toURL()});
-            Class<?> cls = Class.forName("lesson_09.WorkerClass", true, classLoader); // Should print "hello".
+            Class<?> cls = Class.forName("lesson_09.SomeClass", true, classLoader); // Should print "hello".
             Object instance = cls.newInstance(); // Should print "world".
             System.out.println("compile success");
         }

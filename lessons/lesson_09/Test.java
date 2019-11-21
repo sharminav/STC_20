@@ -1,15 +1,7 @@
 package lesson_09;
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.locks.LockSupport;
 
 
 /**
@@ -27,7 +19,7 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class Test {
 
-    private final static String fileName =  "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\WorkerClass.java";
+    private final static String fileName =  "E:\\YandexDisk\\АБЦТ_моя\\Обучение\\Java_2019\\STC_20\\lessons\\lesson_09\\SomeClass.java";
     //private final static String fileName =  "C:\\temp\\WorkerClass.java";
 
     public static void main(String[] args) throws Exception {
@@ -66,7 +58,7 @@ public class Test {
     private static void useCustomClassLoader() throws Exception {
         System.out.println("start loader");
         ClassLoader cl = new MyClassLoader();
-        Class<?> workClass = cl.loadClass("lesson_09.WorkerClass");
+        Class<?> workClass = cl.loadClass("lesson_09.SomeClass");
         workClass.getMethod("doWork").invoke(workClass.newInstance());
         //Worker worker = (Worker) workClass.newInstance();
         //worker.doWork();
