@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class Test {
 
-    static BigInteger factorialOp(FactorialFunc ff, BigInteger n) {
+    private static BigInteger factorialOp(FactorialFunc ff, BigInteger n) {
         return ff.func(n);
     }
 
@@ -20,7 +20,7 @@ public class Test {
 
         // массив чисел
         List<Integer> n = new ArrayList<>();
-        List<BigInteger> nFactorial = new ArrayList<>();
+        List<BigInteger> nFactorial;
 
         // создание списка случайных чисел
         SomeFunc<List> nList = (innerList) -> {
@@ -32,7 +32,7 @@ public class Test {
 
         // печать списка из случйаных чисел
         System.out.println("-- начальный список --");
-        n.forEach((Integer value) -> System.out.println(value));
+        n.forEach(System.out::println);
 
         // расчет факториала
         SomeFunc<List> nFactorialList = (innerList) -> {
