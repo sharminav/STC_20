@@ -15,7 +15,6 @@ public class Factorial {
      */
     public static BigInteger factorial(BigInteger n) {
         BigInteger result = BigInteger.valueOf(1);
-        BigInteger d, e, f;
         for (int i = 1; i <= n.intValue(); i ++){
             result = result.multiply(BigInteger.valueOf(i));
         }
