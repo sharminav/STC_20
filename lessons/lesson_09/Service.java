@@ -21,7 +21,7 @@ public class Service {
      */
     public static List<String> getCode() {
         System.out.println("start getCode");
-        List<String> stringArrayList = new ArrayList<String>();
+        List<String> stringArrayList = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         String str = "";
         do {

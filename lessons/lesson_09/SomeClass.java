@@ -13,8 +13,9 @@ public class SomeClass implements Worker {
     public void doWork() {
         System.out.println("run method");
         //TODO: new lines
-		int i = 199;
-		System.out.println(i);
+		int i = 100;
+		System.out.println(i + 1);
+
 
     }
 
