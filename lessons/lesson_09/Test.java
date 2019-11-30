@@ -25,6 +25,12 @@ public class Test {
     public static void main(String[] args) throws Exception {
         System.out.println("start program");
 
+        // загрузка файла и выполнение
+        for (int i = 0; i < 5000000; i++) {
+            System.out.println(i);
+            useCustomClassLoader();
+        }
+
         // чтение исходного кода файла
         String fileStrings = Service.readFromFile();
 
@@ -41,7 +47,9 @@ public class Test {
         Compile.compileFile(fileName);
 
         // загрузка файла и выполнение
-        useCustomClassLoader();
+        for (int i = 0; i < 50000; i++) {
+            useCustomClassLoader();
+        }
 
         System.out.println("end program");
 
