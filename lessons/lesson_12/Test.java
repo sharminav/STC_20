@@ -23,7 +23,8 @@ public class Test {
     public static int val = 0;
 
     public static void main(String[] args) throws Exception {
-        MyOutOfMemory.demoOutOfMemoryError();
+        //MyOutOfMemory.demoOutOfMemoryError();
+        MyOutOfMemory.demoOutOfMemoryError2();
     }
 
 
