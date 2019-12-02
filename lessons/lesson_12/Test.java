@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Через некоторое время программа должна завершиться с ошибкой
  * OutOfMemoryError c пометкой Java Heap Space.
  *
- * Задание 2. 
+ * Задание 2.
  * Доработать программу так, чтобы ошибка OutOfMemoryError возникала в Metaspace /Permanent Generation
  */
 

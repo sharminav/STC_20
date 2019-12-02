@@ -3,7 +3,7 @@ package lesson_12;
 /**
  * https://plumbr.io/outofmemoryerror/metaspace
  * https://www.javamadesoeasy.com/2017/02/outofmemoryerror-metaspace-solved.html
- * Генерирует ошибку Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "main"
+ * Генерирует ошибку Exception: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread "main" 
  */
 
 public class Metaspace {
