@@ -44,7 +44,7 @@ public class Test {
         connection.close();
 
         connection = workDB.getConnection(db, user, password, false);
-        workDB.insertWithSavePoint(connection);
+        workDB.insertWithSavePoint(connection, 6);
 
 
 

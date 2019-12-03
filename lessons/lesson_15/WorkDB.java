@@ -21,7 +21,7 @@ public class WorkDB {
         return connection;
     }
 
-    /**  
+    /**
      * Получения описания БД
      * @param connection соединение с БД
      * @throws SQLException
@@ -130,7 +130,12 @@ public class WorkDB {
         }
     }
 
-    public void insertWithSavePoint(Connection connection) throws SQLException {
+    /**
+     * ВЫполнение транзакций с SavePoint и Rollback
+     * @param connection строка соединения
+     * @throws SQLException
+     */
+    public void insertWithSavePoint(Connection connection, int userID) throws SQLException {
 
         Savepoint savepoint1 = null;
 
@@ -143,7 +148,7 @@ public class WorkDB {
 
             savepoint1 = connection.setSavepoint("sp1");
 
-            insertStmt = getInsertDataUserRole(connection, 1, 1);
+            insertStmt = getInsertDataUserRole(connection, userID, 1);
             insertStmt.executeUpdate();
 
         }
