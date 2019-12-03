@@ -21,7 +21,7 @@ public class WorkDB {
         return connection;
     }
 
-    /**
+    /**  
      * Получения описания БД
      * @param connection соединение с БД
      * @throws SQLException

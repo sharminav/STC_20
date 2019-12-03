@@ -31,15 +31,15 @@ public class Test {
         workDB.getDBMetadata(connection);
 
         // Вставка при помощи параметризованого запроса
-        //String insertParams = workDB.insertRow(connection);
-        //System.out.println(insertParams);
+        String insertParams = workDB.insertRow(connection);
+        System.out.println(insertParams);
 
         // Вставка при помощи Batch
-        //String insertBatch = workDB.insertRowBatch(connection);
-        //System.out.println(insertBatch);
+        String insertBatch = workDB.insertRowBatch(connection);
+        System.out.println(insertBatch);
 
         // параметризованная выборка
-        //workDB.selectUser(connection, "user_6".concat("%"), "user_login_6".concat("%"));
+        workDB.selectUser(connection, "user_6".concat("%"), "user_login_6".concat("%"));
 
         connection.close();
 
