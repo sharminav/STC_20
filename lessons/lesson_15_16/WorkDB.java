@@ -25,11 +25,11 @@ public class WorkDB {
         try {
             Connection connection = DriverManager.getConnection(dbConnectionString, userName, password);
             connection.setAutoCommit(autoCommit);
-            logger.info("db connection ok");
+            logger.info("соединение с базой данных успешно установлено");
             return connection;
         }
         catch (SQLException ex) {
-            logger.error("db connection error");
+            logger.error("ошибка при установлении соединения с базой данных " + ex.getMessage());
             return null;
         }
     }
@@ -50,37 +50,31 @@ public class WorkDB {
     /**
      * Вставка при помощи параметризованного запроса
      * @param connection соединение с БД
-     * @return результат выполнения
      */
-    public String insertRow(Connection connection) {
+    public void insertRow(Connection connection) {
         try {
             PreparedStatement insertStmt = getInsertDataUser(connection);
             insertStmt.executeUpdate();
-            logger.info("insert row success");
-            return  "insert ok";
+            logger.info("успешная вставка строки параметризованным запросом");
         }
         catch (SQLException ex) {
-            logger.error("error insert row");
-            return  "error";
+            logger.error("ошибка при вставке строки параметризованным запросом " + ex.getMessage());
         }
     }
 
     /**
      * Вставка при помощи batch
      * @param connection
-     * @return результат выполнения
      */
-    public String insertRowBatch(Connection connection)  {
+    public void insertRowBatch(Connection connection)  {
         try {
             PreparedStatement insertStmt = getInsertDataUser(connection);
             insertStmt.addBatch();
             insertStmt.executeBatch();
-            logger.info("insert row batch success");
-            return  "insert ok";
+            logger.info("успешная вставка строки batch");
         }
         catch (SQLException ex) {
-            logger.error("error insert batch row");
-            return  "error";
+            logger.error("ошибка при вставке строки batch: " + ex.getMessage());
         }
     }
 
@@ -102,10 +96,11 @@ public class WorkDB {
             insertStmt.setString(4, "city" + id);
             insertStmt.setString(5, "email_" + id);
             insertStmt.setString(6, "description_" + id);
+            logger.info("строка для вставки в таблицу USERS успешно созадана");
             return insertStmt;
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.error("ошибка при попытке создания данных для вставки в таблицу USERS: " + ex.getMessage());
             return null;
         }
     }
@@ -123,10 +118,11 @@ public class WorkDB {
             PreparedStatement insertStmt = connection.prepareStatement(query);
             insertStmt.setInt(1, userID);
             insertStmt.setInt(2, roleID);
+            logger.info("строка для вставки в таблицу ROLE успешно созадана");
             return insertStmt;
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.error("ошибка при попытке создания данных для вставки в таблицу USER_ROLE: " + ex.getMessage());
             return null;
         }
     }
@@ -139,22 +135,28 @@ public class WorkDB {
      * @param loginid логин пользователя (для запроса)
      * @throws SQLException
      */
-    public void selectUser(Connection connection, String name, String loginid) throws SQLException {
-        Statement pstmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
-        Formatter formatter = new Formatter();
-        formatter.format("select * from public.\"USER\" where name like '%s' and \"login_ID\" like '%s'",  name, loginid) ;
-        //System.out.println(formatter.toString());
-        System.out.println("==========================");
-        ResultSet rs = pstmt.executeQuery(formatter.toString());
-        while (rs.next()) {
-            System.out.println("row ID - " + rs.getInt("id"));
-            System.out.println("name - " + rs.getString("name"));
-            System.out.println("birthday - " + rs.getDate("birthday"));
-            System.out.println("login_ID - " + rs.getString("login_ID"));
-            System.out.println("city - " + rs.getString("city"));
-            System.out.println("email - " + rs.getString("email"));
-            System.out.println("description - " + rs.getString("description"));
+    public void selectUser(Connection connection, String name, String loginid)  {
+        try {
+            Statement pstmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+            Formatter formatter = new Formatter();
+            formatter.format("select * from public.\"USER\" where name like '%s' and \"login_ID\" like '%s'", name, loginid);
+            //System.out.println(formatter.toString());
+            logger.info("запрос данных выполенен успешно");
             System.out.println("==========================");
+            ResultSet rs = pstmt.executeQuery(formatter.toString());
+            while (rs.next()) {
+                System.out.println("row ID - " + rs.getInt("id"));
+                System.out.println("name - " + rs.getString("name"));
+                System.out.println("birthday - " + rs.getDate("birthday"));
+                System.out.println("login_ID - " + rs.getString("login_ID"));
+                System.out.println("city - " + rs.getString("city"));
+                System.out.println("email - " + rs.getString("email"));
+                System.out.println("description - " + rs.getString("description"));
+                System.out.println("==========================");
+            }
+        }
+        catch (SQLException ex) {
+            logger.error("ошибка при выполнении запроса: " + ex.getMessage());
         }
     }
 
@@ -179,14 +181,13 @@ public class WorkDB {
             insertStmt = getInsertDataUserRole(connection, userID, 1);
             insertStmt.executeUpdate();
 
-            logger.info("savepoint ok");
+            logger.info("Вставка нескольких строк успешно завершено");
 
         }
         catch (Exception ex) {
-            //System.out.println("ERROR");
-            logger.error(ex.getMessage());
+            logger.error("ошибка при попытке вставки нескольких строк: " + ex.getMessage());
             connection.rollback(savepoint1);
-            logger.info("rollback ok");
+            logger.info("транзакция успешно откатилась");
             //System.out.println("rollback ok");
         }
         connection.commit();
