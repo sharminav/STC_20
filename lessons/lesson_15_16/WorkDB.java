@@ -1,7 +1,11 @@
-package lesson_15;
+package lesson_15_16;
 
+import org.apache.log4j.Logger;
+
+import java.io.IOException;
 import java.sql.*;
 import java.util.Formatter;
+import java.util.logging.LogManager;
 
 /**
  * Класс для работы с базой данны
@@ -9,27 +13,38 @@ import java.util.Formatter;
 
 public class WorkDB {
 
+    static Logger logger = Logger.getLogger(Test.class.getName());
+
     /**
      * Получение подключения к БД
      * @param dbConnectionString строгка соединения с БД
      * @return соеднение с БД
      * @throws SQLException
      */
-    public Connection getConnection (String dbConnectionString, String userName, String password, Boolean autoCoomit) throws SQLException {
-        Connection connection =  DriverManager.getConnection(dbConnectionString, userName, password);
-        connection.setAutoCommit(autoCoomit);
-        return connection;
+    public Connection getConnection (String dbConnectionString, String userName, String password, Boolean autoCommit){
+        try {
+            Connection connection = DriverManager.getConnection(dbConnectionString, userName, password);
+            connection.setAutoCommit(autoCommit);
+            logger.info("db connection ok");
+            return connection;
+        }
+        catch (SQLException ex) {
+            logger.error("db connection error");
+            return null;
+        }
     }
 
     /**
      * Получения описания БД
      * @param connection соединение с БД
-     * @throws SQLException
      */
-    public void getDBMetadata(Connection connection) throws SQLException {
-        DatabaseMetaData metaData = connection.getMetaData();
-        System.out.println("db connection test");
-        System.out.println("database: " + metaData.getDatabaseProductName() + " " + metaData.getDatabaseProductVersion());
+    public void getDBMetadata(Connection connection) {
+        try {
+            DatabaseMetaData metaData = connection.getMetaData();
+        }
+        catch (SQLException ex ) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -37,23 +52,36 @@ public class WorkDB {
      * @param connection соединение с БД
      * @return результат выполнения
      */
-    public String insertRow(Connection connection) throws SQLException {
-        PreparedStatement insertStmt = getInsertDataUser(connection);
-        insertStmt.executeUpdate();
-        return  "insert ok";
+    public String insertRow(Connection connection) {
+        try {
+            PreparedStatement insertStmt = getInsertDataUser(connection);
+            insertStmt.executeUpdate();
+            logger.info("insert row success");
+            return  "insert ok";
+        }
+        catch (SQLException ex) {
+            logger.error("error insert row");
+            return  "error";
+        }
     }
 
     /**
      * Вставка при помощи batch
      * @param connection
      * @return результат выполнения
-     * @throws SQLException
      */
-    public String insertRowBatch(Connection connection) throws SQLException {
-        PreparedStatement insertStmt = getInsertDataUser(connection);
-        insertStmt.addBatch();
-        insertStmt.executeBatch();
-        return  "insert batch ok";
+    public String insertRowBatch(Connection connection)  {
+        try {
+            PreparedStatement insertStmt = getInsertDataUser(connection);
+            insertStmt.addBatch();
+            insertStmt.executeBatch();
+            logger.info("insert row batch success");
+            return  "insert ok";
+        }
+        catch (SQLException ex) {
+            logger.error("error insert batch row");
+            return  "error";
+        }
     }
 
     /**
@@ -151,11 +179,15 @@ public class WorkDB {
             insertStmt = getInsertDataUserRole(connection, userID, 1);
             insertStmt.executeUpdate();
 
+            logger.info("savepoint ok");
+
         }
         catch (Exception ex) {
-            System.out.println("ERROR");
+            //System.out.println("ERROR");
+            logger.error(ex.getMessage());
             connection.rollback(savepoint1);
-            System.out.println("rollback ok");
+            logger.info("rollback ok");
+            //System.out.println("rollback ok");
         }
         connection.commit();
     }
