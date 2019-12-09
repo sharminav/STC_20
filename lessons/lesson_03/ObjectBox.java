@@ -5,6 +5,7 @@ import java.util.Collection;
 
 /**
  * Класс ObjectBox
+ * 
  */
 
 public class ObjectBox {

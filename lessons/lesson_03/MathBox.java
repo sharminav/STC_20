@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 /**
  * Класс MathBox
+ *
  */
 
 public class MathBox extends ObjectBox{
