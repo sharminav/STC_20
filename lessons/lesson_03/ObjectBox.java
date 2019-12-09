@@ -3,6 +3,10 @@ package lesson_03;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Класс ObjectBox
+ */
+
 public class ObjectBox {
 
     Collection<Object> coll;

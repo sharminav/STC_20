@@ -2,6 +2,9 @@ package lesson_03;
 
 import java.util.ArrayList;
 import java.util.Collection;
+/**
+ * Класс MathBox
+ */
 
 public class MathBox extends ObjectBox{
 
