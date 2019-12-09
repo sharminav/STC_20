@@ -1,5 +1,9 @@
 package lesson_02;
 
+/**
+ * Класс Сортиировки вставкой
+ */
+
 public class SortInsert implements SortPerson {
 
     public static void order(Person[] persons) {

@@ -1,5 +1,8 @@
 package lesson_02;
 
+/**
+ * Класс Сортировки
+ */
 public class SortBubble implements SortPerson {
 
     public static void order(Person[] persons) throws Exception {

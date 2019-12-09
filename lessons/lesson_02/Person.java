@@ -1,7 +1,5 @@
 package lesson_02;
 
-import java.util.Comparator;
-
 public class Person {
     public String name;
     public Integer age;

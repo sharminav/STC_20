@@ -4,7 +4,8 @@ import static java.lang.System.out;
 
 /** ЗАДАНИЕ 1.
  * @author Алексей Шармин
- * Для проверки кажжого из заданий необходимо раскомментировать один из методов errorNullPointerException, ArrayIndexOutOfBoundsException, errorAnyException
+ * Для проверки кажжого из заданий необходимо раскомментировать один из методов
+ * errorNullPointerException, ArrayIndexOutOfBoundsException, errorAnyException
  */
 public class task1 {
 

@@ -1,5 +1,9 @@
 package lesson_02;
 
+/**
+ * Класс Компраратор
+ */
+
 public interface ComparatorPerson {
     /**
      * Функция сортировки объектов Person {@link Person}

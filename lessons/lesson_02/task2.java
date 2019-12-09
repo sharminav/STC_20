@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * @author Алексей Шарамин
  * Задание №2
+ * ---------------
  */
 public class task2 {
 

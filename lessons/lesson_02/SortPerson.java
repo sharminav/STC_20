@@ -1,5 +1,9 @@
 package lesson_02;
 
+/**
+ * Интерфейс
+ */
+
 public interface SortPerson {
 
     static void order(Person[] persons) {}
