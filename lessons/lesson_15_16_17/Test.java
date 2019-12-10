@@ -1,4 +1,4 @@
-package lesson_15_16;
+package lesson_15_16_17;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,6 +41,7 @@ public class Test {
         PropertyConfigurator.configure("log4j.properties");
 
         WorkDB workDB = new WorkDB();
+
         Connection connection = workDB.getConnection(db, user, password, true);
         workDB.getDBMetadata(connection);
 

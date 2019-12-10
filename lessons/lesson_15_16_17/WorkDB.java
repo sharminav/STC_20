@@ -1,11 +1,9 @@
-package lesson_15_16;
+package lesson_15_16_17;
 
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.Formatter;
-import java.util.logging.LogManager;
 
 /**
  * Класс для работы с базой данны
@@ -135,8 +133,8 @@ public class WorkDB {
      * @param loginid логин пользователя (для запроса)
      * @throws SQLException
      */
-    public void selectUser(Connection connection, String name, String loginid)  {
-        try {
+    public void selectUser(Connection connection, String name, String loginid) throws SQLException {
+
             Statement pstmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
             Formatter formatter = new Formatter();
             formatter.format("select * from public.\"USER\" where name like '%s' and \"login_ID\" like '%s'", name, loginid);
@@ -154,10 +152,6 @@ public class WorkDB {
                 System.out.println("description - " + rs.getString("description"));
                 System.out.println("==========================");
             }
-        }
-        catch (SQLException ex) {
-            logger.error("ошибка при выполнении запроса: " + ex.getMessage());
-        }
     }
 
     /**
@@ -185,7 +179,7 @@ public class WorkDB {
 
         }
         catch (Exception ex) {
-            logger.error("ошибка при попытке вставки нескольких строк: " + ex.getMessage());
+            logger.error("ошибка при попытке вставки нескольких строк", ex);
             connection.rollback(savepoint1);
             logger.info("транзакция успешно откатилась");
             //System.out.println("rollback ok");
