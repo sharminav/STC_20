@@ -4,6 +4,7 @@ package lesson_03;
  * @author Sharmin Aleksei
  * Класс для тестирования
  * Домашнее задание 2. Тестирование классов
+ * Изменение для GitHub
  */
 public class Test {
 
